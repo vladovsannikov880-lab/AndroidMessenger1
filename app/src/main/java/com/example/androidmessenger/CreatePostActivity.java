@@ -59,7 +59,7 @@ public class CreatePostActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     findViewById(R.id.progress).setVisibility(View.GONE);
                     generatedTv.setText("Демо-пост: " + prompt + "\n\n" +
-                            "Это fallback-текст. Добавьте рабочий ключ API, чтобы получать ответы модели.");
+                            "Это fallback-текст. Добавьте AI_API_KEY в local.properties и выберите провайдера (OpenAI/Mistral/OpenRouter).");
                     Toast.makeText(CreatePostActivity.this, message, Toast.LENGTH_LONG).show();
                 });
             }
@@ -72,8 +72,17 @@ public class CreatePostActivity extends AppCompatActivity {
             Toast.makeText(this, "Сначала сгенерируйте текст", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Toast.makeText(this, "Сессия истекла, войдите заново", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String id = FirebaseDatabase.getInstance().getReference("posts").child(uid).push().getKey();
+        if (id == null) {
+            Toast.makeText(this, "Не удалось создать ID поста", Toast.LENGTH_SHORT).show();
+            return;
+        }
         long now = System.currentTimeMillis();
         String title = text.length() > 60 ? text.substring(0, 60) + "..." : text;
         Post post = new Post(id, uid, promptEt.getText().toString().trim(), text, title, now, now);

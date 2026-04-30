@@ -2,6 +2,7 @@ package com.example.androidmessenger;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -32,6 +33,14 @@ public class RegisterActivity extends AppCompatActivity {
         findViewById(R.id.btn_register).setOnClickListener(v -> {
             String email = emailEt.getText().toString().trim();
             String password = passwordEt.getText().toString().trim();
+            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                Toast.makeText(this, "Введите email и пароль", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (password.length() < 6) {
+                Toast.makeText(this, "Пароль должен быть не короче 6 символов", Toast.LENGTH_SHORT).show();
+                return;
+            }
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener(authResult -> {
                         startActivity(new Intent(this, MainActivity.class));

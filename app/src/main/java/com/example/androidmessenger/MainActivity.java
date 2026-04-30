@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private PostAdapter adapter;
     private ProgressBar progressBar;
+    private TextView emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recycler_posts);
         progressBar = findViewById(R.id.progress);
+        emptyView = findViewById(R.id.tv_empty);
         adapter = new PostAdapter(post -> {
             Intent intent = new Intent(this, EditPostActivity.class);
             intent.putExtra("post_id", post.id);
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 adapter.submit(posts);
+                emptyView.setVisibility(posts.isEmpty() ? View.VISIBLE : View.GONE);
                 progressBar.setVisibility(View.GONE);
             }
 

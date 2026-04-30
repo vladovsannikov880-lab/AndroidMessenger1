@@ -1,6 +1,7 @@
 package com.example.androidmessenger;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,8 +31,18 @@ public class EditPostActivity extends AppCompatActivity {
             return insets;
         });
 
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Toast.makeText(this, "Сессия истекла, войдите заново", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         postId = getIntent().getStringExtra("post_id");
+        if (TextUtils.isEmpty(postId)) {
+            Toast.makeText(this, "Пост не найден", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
         textEt = findViewById(R.id.et_text);
 
         FirebaseDatabase.getInstance().getReference("posts").child(uid).child(postId).get()
