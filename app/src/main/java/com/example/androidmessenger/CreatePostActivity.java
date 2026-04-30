@@ -59,7 +59,7 @@ public class CreatePostActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     findViewById(R.id.progress).setVisibility(View.GONE);
                     generatedTv.setText("Демо-пост: " + prompt + "\n\n" +
-                            "Это fallback-текст. Добавьте рабочий ключ API, чтобы получать ответы модели.");
+                            "Это fallback-текст. Добавьте AI_API_KEY в local.properties и выберите провайдера (OpenAI/Mistral/OpenRouter).");
                     Toast.makeText(CreatePostActivity.this, message, Toast.LENGTH_LONG).show();
                 });
             }

@@ -12,7 +12,10 @@ android {
     }
 
     defaultConfig {
-        buildConfigField "String", "GIGACHAT_API_KEY", "\"${project.findProperty("GIGACHAT_API_KEY") ?: ""}\""
+        buildConfigField "String", "AI_API_KEY", "\"${project.findProperty("AI_API_KEY") ?: ""}\""
+        buildConfigField "String", "AI_PROVIDER", "\"${project.findProperty("AI_PROVIDER") ?: "openai"}\""
+        buildConfigField "String", "AI_MODEL", "\"${project.findProperty("AI_MODEL") ?: ""}\""
+        buildConfigField "String", "AI_BASE_URL", "\"${project.findProperty("AI_BASE_URL") ?: ""}\""
         applicationId "com.example.androidmessenger"
         minSdk 24
         targetSdk 36
