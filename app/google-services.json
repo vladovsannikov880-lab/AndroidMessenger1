@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "577022043358",
+    "firebase_url": "https://androidmessenger-cc536-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "androidmessenger-cc536",
+    "storage_bucket": "androidmessenger-cc536.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577022043358:android:1ded8f4dfbb6e398348e4f",
+        "android_client_info": {
+          "package_name": "com.example.androidmessenger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG9kQgbj6NOlKts1HioBV-QBSHdmcQRGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
